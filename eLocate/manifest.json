@@ -1,0 +1,22 @@
+{
+  "name": "eLocate",
+  "label": "Enhanced Locate",
+  "type": "widget",
+  "version": "1.9.0",
+  "exbVersion": "1.9.0",
+  "author": "Robert Scheitlin",
+  "description": "This widget allows you to geocode an address, reverse geocode, and locate based on coordinates.",
+  "copyright": "2022",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {},
+  "translatedLocales": [
+    "en"
+  ],
+  "dependency": [
+    "jimu-arcgis"
+  ],
+  "defaultSize": {
+    "width": 400,
+    "height": 410
+  }
+}
