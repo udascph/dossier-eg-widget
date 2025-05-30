@@ -1,6 +1,6 @@
 {
-  "name": "dossier-eg",
-  "label": "Dossier EG",
+  "name": "eLocate",
+  "label": "Enhanced Locate",
   "type": "widget",
   "version": "1.8.2",
   "exbVersion": "1.14.0",
