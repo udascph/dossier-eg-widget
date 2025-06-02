@@ -1,8 +1,8 @@
 {
-  "name": "eLocate",
-  "label": "Enhanced Locate",
+  "name": "dossier-eg",
+  "label": "Dossier EG",
   "type": "widget",
-  "version": "1.8.2",
+  "version": "1.8.0",
   "exbVersion": "1.14.0",
   "author": "Georgi Gatin",
   "description": "Gestion des dossiers Étude générale",
