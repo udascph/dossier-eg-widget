@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirection selon groupe</title>
-  <script src="https://js.29/
+  https://js.arcgis.com/4.29/
   <style>
     body { font-family: sans-serif; padding: 2em; }
   </style>
@@ -37,11 +37,11 @@
           const groups = user.groups.map(g => g.title);
 
           if (groups.includes("Créateur")) {
-            window.location.href = "https://https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/createur";
           } else if (groups.includes("Éditeur")) {
-            window.location.href = "https://https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/editeur";
           } else if (groups.includes("Lecteur")) {
-            window.location.href = "https://https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/lecteur";
           } else {
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
           }
@@ -53,7 +53,3 @@
   </script>
 </body>
 </html>
-
-
-
-
