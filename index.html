@@ -12,7 +12,6 @@
   <p>Chargement... Veuillez patienter.</p>
 
   <script>
-    // Vérifie que require est disponible
     function waitForRequire(callback, timeout = 5000) {
       const start = Date.now();
       const interval = setInterval(() => {
@@ -37,11 +36,11 @@
           const groups = user.groups.map(g => g.title);
 
           if (groups.includes("Créateur")) {
-            window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/createur";
           } else if (groups.includes("Éditeur")) {
-            window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/editeur";
           } else if (groups.includes("Lecteur")) {
-            window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/apps/experiencebuilder/lecteur";
           } else {
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
           }
