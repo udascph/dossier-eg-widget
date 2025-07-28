@@ -1,34 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>Redirection selon groupe</title>
-  https://js.arcgis.com/4.29/
+  <script src="https://js.29/
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+  </style>
 </head>
 <body>
   <p>Chargement... Veuillez patienter.</p>
 
   <script>
-     window.onload = function () {
-      const portal = new arcgisPortal.Portal("https://donneesgeomatique.dev.montreal.ca/portal");
-      portal.load().then(() => {
-        const user = portal.user;
-        const groups = user.groups.map(g => g.title);
-
-         if (groups.includes("Créateur")) {
-          window.location.href = "https://ton_portail/apps/experiencebuilder/createur";
-        } else if (groups.includes("Éditeur")) {
-          window.location.href = "https://ton_portail/apps/experiencebuilder/editeur";
-        } else if (groups.includes("Lecteur")) {
-          window.location.href = "https://ton_portail/apps/experiencebuilder/lecteur";
-        } else {
-          document.body.innerHTML = "Aucun accès défini pour votre groupe.";
+    // Vérifie que require est disponible
+    function waitForRequire(callback, timeout = 5000) {
+      const start = Date.now();
+      const interval = setInterval(() => {
+        if (typeof require === "function") {
+          clearInterval(interval);
+          callback();
+        } else if (Date.now() - start > timeout) {
+          clearInterval(interval);
+          document.body.innerHTML = "Erreur : l'API ArcGIS n'a pas pu être chargée.";
         }
+      }, 100);
+    }
+
+    waitForRequire(() => {
+      require(["esri/portal/Portal"], function(Portal) {
+        const portal = new Portal({
+          url: "https://donneesgeomatique.dev.montreal.ca/portal"
+        });
+
+        portal.load().then(() => {
+          const user = portal.user;
+          const groups = user.groups.map(g => g.title);
+
+          if (groups.includes("Créateur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/createur";
+          } else if (groups.includes("Éditeur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/editeur";
+          } else if (groups.includes("Lecteur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/lecteur";
+          } else {
+            document.body.innerHTML = "Aucun accès défini pour votre groupe.";
+          }
+        }).catch(error => {
+          document.body.innerHTML = "Erreur lors du chargement du portail : " + error.message;
+        });
       });
-    };
+    });
   </script>
 </body>
 </html>
+
 
 
 
