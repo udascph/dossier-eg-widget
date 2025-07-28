@@ -1,48 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eb Widgets</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-    }
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-    main {
-      margin: 20px auto;
-      max-width: 800px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      margin-top: 20px;
-      color: #888;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Redirection selon groupe</title>
+  https://js.arcgis.com/4.29/
 </head>
 <body>
-  <header>
-    <h1>Dossier EG</h1>
-  </header>
-  <main>
-    <h2>About This Page</h2>
-    <p>This is a simple HTML index file to demonstrate basic structure and styling.</p>
-    <p>Feel free to modify and expand it as you like!</p>
-  </main>
-  <footer>
-    &copy; 2025 My Sample Page
-  </footer>
+  <p>Chargement... Veuillez patienter.</p>
+
+  <script>
+    require([
+      "esri/identity/IdentityManager",
+      "esri/portal/Portal"
+    ], function(esriId, Portal) {
+      esriId.checkSignInStatus("https://ton_portail/arcgis").then(() => {
+        const portal = new Portal.Portal();
+        portal.load().then(() => {
+          const user = portal.user;
+          const groups = user.groups.map(g => g.title);
+
+          if (groups.includes("Créateur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/createur";
+          } else if (groups.includes("Éditeur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/editeur";
+          } else if (groups.includes("Lecteur")) {
+            window.location.href = "https://ton_portail/apps/experiencebuilder/lecteur";
+          } else {
+            document.body.innerHTML = "Aucun accès défini pour votre groupe.";
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
