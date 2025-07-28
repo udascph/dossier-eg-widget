@@ -13,14 +13,14 @@
       "esri/identity/IdentityManager",
       "esri/portal/Portal"
     ], function(esriId, Portal) {
-      esriId.checkSignInStatus("https://ton_portail/arcgis").then(() => {
+      esriId.checkSignInStatus("https://https://donneesgeomatique.dev.montreal.ca/portal").then(() => {
         const portal = new Portal.Portal();
         portal.load().then(() => {
           const user = portal.user;
           const groups = user.groups.map(g => g.title);
 
           if (groups.includes("Créateur")) {
-            window.location.href = "https://ton_portail/apps/experiencebuilder/createur";
+            window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal/apps/experiencebuilder/experience/?id=659f22a8d63346b5b2494307227019df";
           } else if (groups.includes("Éditeur")) {
             window.location.href = "https://ton_portail/apps/experiencebuilder/editeur";
           } else if (groups.includes("Lecteur")) {
