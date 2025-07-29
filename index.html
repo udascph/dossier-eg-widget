@@ -25,14 +25,25 @@
       }, 100);
     }
 
-    waitForRequire(() => {
-      require(["esri/portal/Portal"], function(Portal) {
-        const portal = new Portal({
-          url: "https://donneesgeomatique.dev.montreal.ca/portal"
-        });
+   
+waitForRequire(() => {
+    require([
+      "esri/identity/IdentityManager",
+      "esri/portal/Portal"
+    ], function(IdentityManager, Portal) {
+      const portalUrl = "https://donneesgeomatique.dev.montreal.ca/portal";
 
-        portal.load().then(() => {
-        const user = portal.user;
+      IdentityManager.checkSignInStatus(portalUrl + "/sharing")
+        .then(() => {
+          const portal = new Portal({ url: portalUrl });
+          portal.load().then(() => {
+            const user = portal.user;
+
+            if (!user) {
+              document.body.innerHTML = "Utilisateur non connecté.";
+              return;
+            }
+
         user.fetchGroups().then((groups) => {
         const groupTitles = groups.map(g => g.title);
 
@@ -47,8 +58,10 @@
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
           }
         });
-        }).catch(error => {
-          document.body.innerHTML = "Erreur lors du chargement du portail : " + error.message;
+        })
+         .catch(() => {
+          IdentityManager.signIn(portalUrl + "/sharing");
+
         });
       });
     });
