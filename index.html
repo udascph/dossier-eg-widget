@@ -46,6 +46,7 @@
           } else {
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
           }
+        });
         }).catch(error => {
           document.body.innerHTML = "Erreur lors du chargement du portail : " + error.message;
         });
