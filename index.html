@@ -57,7 +57,8 @@ waitForRequire(() => {
           } else {
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
           }
-        });
+          });
+         });    
         })
          .catch(() => {
           IdentityManager.signIn(portalUrl + "/sharing");
