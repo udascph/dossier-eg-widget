@@ -32,14 +32,16 @@
         });
 
         portal.load().then(() => {
-          const user = portal.user;
-          const groups = groups.map(g => g.title);
+        const user = portal.user;
+        user.fetchGroups().then((groups) => {
+        const groupTitles = groups.map(g => g.title);
 
-          if (groups.includes("Créateur")) {
+
+          if (groupTitles.includes("Créateur")) {
             window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
-          } else if (groups.includes("Éditeur")) {
+          } else if (groupTitles.includes("Éditeur")) {
             window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
-          } else if (groups.includes("Lecteur")) {
+          } else if (groupTitles.includes("Lecteur")) {
             window.location.href = "https://donneesgeomatique.dev.montreal.ca/portal";
           } else {
             document.body.innerHTML = "Aucun accès défini pour votre groupe.";
